@@ -1,5 +1,7 @@
 # jasypt 라이브러리를 활용하여 민감정보 암호화하기
 
+jasypt 를 사용하기 위한 방법은 여러개 있따~~~!~!@~!@
+
 `application.properties` 파일에서 비밀번호, IP 등을 가리기 위한 설정이다.
 
 1. build.gradle
