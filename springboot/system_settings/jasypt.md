@@ -84,13 +84,8 @@ public class TestController {
     @Value("${jasypt.string.to.encrypt}")
     private String jasyptStringToEncrypt;
 
-    @Value("${jasypt.encryptor.password}")
-    private String jasyptEcryptorPassword;
-
     @GetMapping("/encryptAndPrint")
     public void encryptAndPrint() throws Exception{
-
-        System.out.println("jasyptEcryptorPassword: " + jasyptEcryptorPassword); // jasypt 암호
 
         String encryptedText = encryptor.encrypt(jasyptStringToEncrypt);
         System.out.println("encryptedText: " + encryptedText); //암호화된 값 
