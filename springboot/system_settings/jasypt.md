@@ -105,11 +105,11 @@ public class TestController {
 ```
 
 - `@Qualifier`: JasyptConfig.java 에서 커스텀으로 생성한 Encryptor 빈을 선택해주기 위해 빈 이름을 직접 적는다.
-- 암호화하기 위한 값도 민감 정보기 때문에 http 통신이나 로그에 남지 않기 위해 환경변수로 값을 입력 받고, 서버 로그를 통해 암호화한 결과를 확인한다.
+- 민감 정보를 http 통신이나 로그에 남지 않게하기 위해 환경변수로 값을 입력 받고, 서버 로그를 통해 암호화한 결과를 확인한다.
 
 5. 암호화된 properties
 
-application.properties 파일에서 암호화하고자하는 키에 대해 값을 `ENC(암호화된 값)` 처럼 선언한다.
+application.properties 파일에서 암호화된 값을 `ENC(암호화된 값)` 처럼 선언한다.
 
 ```
 server.ssl.key-store-password=ENC(FCg4lMn2Nb5P8pGEjzBOdnUZvS4EAOdRYiaP5qGTzGMchZyfHKK/pB8H+1U4GpP1)
