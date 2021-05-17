@@ -49,7 +49,7 @@ public class JasyptConfig {
 
 - `@SpringBootApplication` 처럼 `@EnableAutoConfiguration` 태그가 포함된 프로젝트는 기본적으로 `lazyjasyptStringEncryptor` 빈이 기본으로 생성된다.
 - 기본 빈을 application.properties 의 값들로 커스터마이징할 수도 있지만, 새로운 빈을 생성하여 사용하도록 클래스를 선언한다.
-- 여기서 password 설정 또한 application.properties 에서 읽어오기 때문에 보안을 위해 환경변수로 입력받도록 한다.
+- 여기서 password 설정도 application.properties 에서 읽어오도록 하고 보안을 위해 환경변수로 입력받도록 한다.
 
 3. application.properties
 
