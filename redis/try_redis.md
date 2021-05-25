@@ -188,3 +188,90 @@ OK
 2) "x-ray vision"
 3) "pecking"
 ```
+
+- SPOP: extracts 2 elements in random
+
+```
+> SADD letters a b c d e f
+(integer) 6
+> SPOP letters 2
+1) "a"
+2) "f"
+```
+
+## Sorted Sets
+
+- Similar to regular sets, each value has an associated score used to sort the elemenets in set.
+
+```
+> ZADD hackers 1940 "Alan Kay"
+(integer) 1
+> ZADD hackers 1906 "Grace Hopper"
+(integer) 1
+> ZADD hackers 1953 "Richard Stallman"
+(integer) 1
+> ZADD hackers 1965 "Yukihiro Matsumoto"
+(integer) 1
+> ZADD hackers 1916 "Claude Shannon"
+(integer) 1
+> ZADD hackers 1969 "Linus Torvalds"
+(integer) 1
+> ZADD hackers 1957 "Sophie Wilson"
+(integer) 1
+> ZADD hackers 1912 "Alan Turing"
+(integer) 1
+> ZRANGE hackers 2 4
+1) "Claude Shannon"
+2) "Alan Kay"
+3) "Richard Stallman"
+```
+
+## Hashes
+
+- Hashes are maps between string feilds and string values.
+- Perfect data type to represent objects.
+
+- HSET/HGETALL/HMSET/HGET
+
+```
+> HSET user:1000 name "John Smith"
+1
+> HSET user:1000 email "john.smith@example.com"
+1
+> HSET user:1000 password "s3cret"
+1
+> HGETALL user:1000
+1) "name"
+2) "John Smith"
+3) "email"
+4) "john.smith@example.com"
+5) "password"
+6) "s3cret"
+> HMSET user:1001 name "Mary Jones" password "hidden" email "mjones@example.com"
+OK
+> HGET user:1001 name
+"Mary Jones"
+```
+
+- Numerical values in hash fields are handled exactly the same as simple strings.
+- HSET/HINCRBY/HDEL
+
+```
+> HSET user:1000 name "John Smith"
+1
+> HSET user:1000 email "john.smith@example.com"
+1
+> HSET user:1000 password "s3cret"
+1
+> HGETALL user:1000
+1) "name"
+2) "John Smith"
+3) "email"
+4) "john.smith@example.com"
+5) "password"
+6) "s3cret"
+> HMSET user:1001 name "Mary Jones" password "hidden" email "mjones@example.com"
+OK
+> HGET user:1001 name
+"Mary Jones"
+```
