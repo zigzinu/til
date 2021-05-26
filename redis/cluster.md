@@ -61,3 +61,24 @@ $ sudo apt-get install redis
 - **Node timeout**
   - After node timeout, a master node considered to be failing can be replaced by one of its replicas.
   - After node timeout, a master node that cannot sense majority of the other master nodes enters an error state and stops accepting writes.
+
+## Configuration parameters
+- **cluster-enabled <yes/no>**
+  - yes: Redis Cluster support in a specific Redis instance.
+  - no: instance starts as a stand alone instance.
+- **cluster-config-file <filename>**: file that Redis Cluster persists to re-read at startup.
+  - contains nodes in the cluster, their state, persistent variables...
+- **cluster-node-timeout <milliseconds>**
+  - Every node that can't reach the majority of master nodes for specific amount of time, will stop accepting queries.
+  - If a master node is not reachable for more than specific amount of time, it will be failed over by its slaves.
+- **cluster-slave-validity-factor <factor>**
+  - zero: slave remains always valid to failover a master
+  - positive: slave losing connection to its master more than factor * node-timeout becomes invalid to failover a master.
+- **cluster-migration-barrier <count>**: number of minimum slave counts for a master. Slave gets migrated from a master with sufficient slaves to a master that has lost slave below the barrier count. 
+  - defualt: 1
+- **cluster-require-full-coverage <yes/no>**
+  - yes: slave 가 없는 master 중 하나라도 다운 되면 클러스터가 다운된다.
+  - no: slave가 없는 master가 다운되어도 과만의 master가 살아있으면, 클러스터가 정상적으로 살아있다.
+  - yes: 살아있는 노드의 데이터를 받아도 전체 데이터의 무결성이 깨질 때는 yes 선택.
+- **cluster-allow-reads-when-down <yes/no>**
+  - yes: allow read from a node during the `fail` state.
