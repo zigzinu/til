@@ -82,3 +82,19 @@ $ sudo apt-get install redis
   - yes: 살아있는 노드의 데이터를 받아도 전체 데이터의 무결성이 깨질 때는 yes 선택.
 - **cluster-allow-reads-when-down <yes/no>**
   - yes: allow read from a node during the `fail` state.
+  
+## Multikey operations
+
+출처: http://redisgate.kr/redis/cluster/cluster_introduction.php
+  
+- 클러스터에서는 멀티 키 명령을 수행할 수 없다. 
+  - `MSET key1 value1 key2 value2`
+  - `SUNION key1 key2`
+  - `SORT`
+- **Hash tag**를 사용하면 사용할 수 있다.
+  - `{user001}.following`와 `{user001}.followers`는 같은 슬롯에 저장된다.
+- [**Enterprise 게이트 서버**](http://redisgate.kr/redisgate/ent/gate_intro.php)를 사용하면 멀티 키 명령을 사용할 수 있다.
+  
+## Cluster Start
+  
+
