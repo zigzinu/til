@@ -64,3 +64,34 @@ $ redis-cli -c -p 7000
 ```
 > redis-cli -c -p 7000 shutdown
 ```
+
+## Redis cluster 조회
+
+```
+$ redis-cli --cluster call 127.0.0.1:7002 keys '*'
+```
+- `--cluster call`: 클러스터에 포함된 노드 중 하나의 IP/Port를 입력하면, 클러스터의 모든 노드에 대한 명령(`keys '*'`)을 실시한다. 
+
+```
+$ redis-cli --cluster call 127.0.0.1:7002 keys '*'
+[ERR] Unable to load info for node 127.0.0.1:7000
+>>> Calling keys *
+127.0.0.1:7002: key
+spring:session:sessions:c337fbf2-ebe5-4e79-8ee5-cffb8da64976
+127.0.0.1:7001: spring:session:expirations:1623809520000
+```
+- 암호가 설정된 노드에 대해선 `Authentication`이 실패한다.
+
+```
+$ redis-cli --cluster call 127.0.0.1:7002 keys '*' -a fabric
+```
+- `-a`: 암호를 입력하는 옵션
+- 운영 환경에서 command 에 입력하는 것을 권장하지 않는다.
+
+```
+$ redis-cli --cluster call 127.0.0.1:7002 keys '*' -a fabric
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+Node 127.0.0.1:7002 replied with error:
+ERR AUTH <password> called without any password configured for the default user. Are you sure your configuration is correct?
+```
+- 암호가 설정되어있지 않은 노드가 포함되어있으면, 명령어가 실패한다.
