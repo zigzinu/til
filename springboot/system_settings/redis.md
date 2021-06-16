@@ -54,3 +54,78 @@ Spring 에서 redis 에 세션을 저장했을 때 저장하는 key 들을 다�
 127.0.0.1:7000: spring:session:expirations:1623811860000
 ```
 
+- 어떤 의미를 하는지? https://deveric.tistory.com/76
+
+타입 조회
+
+```
+127.0.0.1:7000> auth fabric
+OK
+127.0.0.1:7000> type "spring:session:sessions:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978"
+hash
+127.0.0.1:7000> type "spring:session:expirations:1623819300000"
+set
+127.0.0.1:7000> type "spring:session:sessions:expires:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978"
+-> Redirected to slot [8477] located at 127.0.0.1:7001
+(error) NOAUTH Authentication required.
+127.0.0.1:7001> auth fabric
+OK
+127.0.0.1:7001> type "spring:session:sessions:expires:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978"
+string
+```
+
+- `spring:session:sessions:세션값`: hash
+- `spring:session:expirations:시간Millis`: set
+- `spring:session:sessions:expires:세션값`: string
+
+Hash 타입에 대한 조회 (`spring:session:sessions:세션값`)
+
+- 세선 생성 시간 / 마지막 조회 시간 / 최대 타임아웃 허용 시간 / 세션에 저장한 값들
+- 을 field 로 이용하여 value 를 조회할 수 있다.
+
+```
+127.0.0.1:7000> hkeys "spring:session:sessions:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978"
+1) "creationTime"
+2) "sessionAttr:SPRING_SECURITY_SAVED_REQUEST"
+3) "lastAccessedTime"
+4) "maxInactiveInterval"
+127.0.0.1:7000> hget "spring:session:sessions:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978" "creationTime"
+"\xac\xed\x00\x05sr\x00\x0ejava.lang.Long;\x8b\xe4\x90\xcc\x8f#\xdf\x02\x00\x01J\x00\x05valuexr\x00\x10java.lang.Number\x86\xac\x95\x1d\x0b\x94\xe0\x8b\x02\x00\x00xp\x00\x00\x01z\x13\x10\x02\x19"
+```
+
+- `hkeys <key>`
+- `hget <key> <field>`
+
+Set 타입에 대한 조회 (`spring:session:expirations:시간Millis`)
+
+- 해당 시간에 만료되는 session 들의 집합이다. 시간이 되면 모두 조회해서 삭제한다.
+
+```
+127.0.0.1:7000> smembers "spring:session:expirations:1623819300000"
+1) "\xac\xed\x00\x05t\x00,expires:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978"
+```
+
+- expire 에 대한 값들이 들어있는 것을 확인
+
+String 타입에 대한 조회 (`spring:session:sessions:expires:세션값`)
+
+```
+127.0.0.1:7001> get "spring:session:sessions:expires:3fe57b8d-0ee9-471b-817d-b8cbc7f6d978"
+""
+```
+
+- `string` 타입은 key와 value의 관계가 1:1 이다.
+
+**정리하면**
+- `spring:session:sessions:b3358f77-5290-4a75-b805-a9d5c4a8b6d3` 은 Hash 타입으로 세션에 관한 
+여러가지 `field`에 대한 `value`를 조회할 수 있다.
+- `spring:session:sessions:expires:b3358f77-5290-4a75-b805-a9d5c4a8b6d3` 은 String 타입으로 
+단순히 만료되어야하는 세션 값을 저장한다.
+- `spring:session:expirations:1623811860000` 은 Set 타입으로 해당 시간에 만료되어야 하는 
+세션(string)들의 집합이다.
+
+127.0.0.1:7002: spring:session:sessions:expires:b3358f77-5290-4a75-b805-a9d5c4a8b6d3
+`spring:session:sessions:b3358f77-5290-4a75-b805-a9d5c4a8b6d3`
+127.0.0.1:7000: spring:session:expirations:1623811860000
+
+
