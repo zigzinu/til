@@ -43,3 +43,14 @@ https://coding-start.tistory.com/129
 ---
 
 password 도 설정해주었다. `setPassword()`
+
+---
+
+Spring 에서 redis 에 세션을 저장했을 때 저장하는 key 들을 다음과 같다.
+
+```
+127.0.0.1:7002: spring:session:sessions:expires:b3358f77-5290-4a75-b805-a9d5c4a8b6d3
+127.0.0.1:7001: spring:session:sessions:b3358f77-5290-4a75-b805-a9d5c4a8b6d3
+127.0.0.1:7000: spring:session:expirations:1623811860000
+```
+
