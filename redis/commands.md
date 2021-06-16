@@ -82,6 +82,8 @@ spring:session:sessions:c337fbf2-ebe5-4e79-8ee5-cffb8da64976
 ```
 - 암호가 설정된 노드에 대해선 `Authentication`이 실패한다.
 
+### 암호 입력
+
 ```
 $ redis-cli --cluster call 127.0.0.1:7002 keys '*' -a fabric
 ```
@@ -95,3 +97,23 @@ Node 127.0.0.1:7002 replied with error:
 ERR AUTH <password> called without any password configured for the default user. Are you sure your configuration is correct?
 ```
 - 암호가 설정되어있지 않은 노드가 포함되어있으면, 명령어가 실패한다.
+
+### Watch 모니터링
+
+```
+$ watch redis-cli --cluster call 127.0.0.1:7002 keys \'*\' -a fabric
+```
+- `\`: escape 문자로 따옴표/쌍따옴표를 입력해야 한다.
+
+```
+Every 2.0s: redis-cli --cluster call 127.0.0.1:7002 keys '*' -a fabric                                                                                                          cicd: Wed Jun 16 02:15:44 2021
+
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+^[29;1m>>> Calling^[0m keys *
+127.0.0.1:7002: key
+spring:session:sessions:c337fbf2-ebe5-4e79-8ee5-cffb8da64976
+127.0.0.1:7001: spring:session:sessions:2a9c0889-9582-402c-b338-0501f16de3c1
+127.0.0.1:7000: spring:session:sessions:expires:2a9c0889-9582-402c-b338-0501f16de3c1
+spring:session:expirations:1623811560000
+key2
+```
