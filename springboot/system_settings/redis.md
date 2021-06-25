@@ -1,3 +1,104 @@
+읽어볼반: https://pasudo123.tistory.com/379
+
+1. build.gradle
+```
+    implementation 'org.springframework.session:spring-session-data-redis:2.5.1'
+    implementation 'io.lettuce:lettuce-core:6.1.2.RELEASE'
+```
+2. application.properties
+
+```
+spring.session.store-type=redis
+spring.session.redis.flush-mode=on_save
+spring.session.redis.namespace=spring:session
+spring.redis.cluster.nodes=172.26.1.4:7051,172.26.1.5:7051,172.26.1.6:7051
+```
+
+3. Lettuce Config
+
+```
+  private final RedisClusterConfigurationProperties clusterProperties;
+  
+	@Bean
+	public LettuceConnectionFactory connectionFactory() {
+        RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration(clusterProperties.getNodes());
+		return new LettuceConnectionFactory(clusterConfiguration); 
+	}
+```
+
+3-1. Cluster Property 에서 nodes ip들 읽어오기. 
+```
+@Component
+@ConfigurationProperties(prefix = "spring.redis.cluster")
+public class RedisClusterConfigurationProperties {
+    
+    /**
+     * spring.redis.cluster.nodes[0]=127.0.0.1:6379
+     * spring.redis.cluster.nodes[1]=127.0.0.1:6380
+     * spring.redis.cluster.nodes[2]=127.0.0.1:6381
+     */
+    List<String> nodes;
+ 
+    public List<String> getNodes() {
+        return nodes;
+    }
+ 
+    public void setNodes(List<String> nodes) {
+        this.nodes = nodes;
+    }
+       
+}
+```
+
+4. Serializable 문제 해결
+
+- UserDao 를 Serialize 하려고 한다.
+```
+public class UserDao implements Serializable {
+```
+- DefaultSerializer 를 사용하면 실패한다.
+```
+    @Bean
+    public RedisTemplate<Object, Object> sessionRedisTemplate() {
+        RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
+
+        template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
+
+        template.setConnectionFactory(connectionFactory());
+        return template;
+    }
+```
+
+출처: https://stackoverflow.com/questions/38532754/spring-session-redis-serializer-serializationexception
+
+5. SetTimeout vs maxInactiveIntervalInSeconds
+
+- Redis 쓰기 전에는 `application.properties`에서 `server.servlet.session.timeout=1m` 으로 세팅하면 `session.getMaxInactiveInterval()` 값도 `60`으로 맞춰졌는데, `@EnableRedisHttpSession`의 `maxInactiveIntervalInSeconds`의 기본값은 `1800`이다.
+- 아래처럼 세팅을 추가해주면, inactive 시간이 지나서 세션이 만료되는 것을 확인할 수 있다.
+```
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60)
+```
+- timeout 이랑 inactiveInterval 의 관계는 더 알아볼 필요가 있는데, inactiveInterval 로 timeout 세팅을 오버라이드하는 것 같다.
+
+출처: 
+- https://docs.spring.io/spring-session/docs/current/api/org/springframework/session/data/redis/config/annotation/web/http/EnableRedisHttpSession.html#saveMode--
+- https://pasudo123.tistory.com/379
+
+
+
+
+
+
+## 쿠키
+
+- `JSESSIONID`에서 `SESSION`로 바뀜
+- Instead of using Tomcat’s HttpSession, we persist the values in Redis. Spring Session creates a cookie named SESSION in your browser. That cookie contains the ID of your session.
+
+출처: https://docs.spring.io/spring-session/docs/current/reference/html5/guides/java-redis.html
+
+---
 https://ozofweird.tistory.com/entry/Spring-Boot-Redis-Lettuce%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-API-%EC%A0%9C%EC%9E%91
 
 참고하면 lettuce host port 세팅 잇음
