@@ -2,6 +2,8 @@
 
 ## 명령어 모음
 
+<br> 
+
 ### **Disk Free**: `df -h`
 
 디스크 용량 부족에 대한 메세지가 나올 때 사용하는 명령어
@@ -34,6 +36,7 @@
 
 출처: https://stackoverflow.com/questions/1019116/using-ls-to-list-directories-and-their-total-sizes
 
+<br> 
 
 ## ncdu
 
