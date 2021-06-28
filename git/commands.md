@@ -12,6 +12,10 @@
                status would put it.
   - `--mixed`: Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated. This is the default action.
   
+**<commit>**
+  - `HEAD~3`: HEAD 에서 3번째 이전 커밋으로 되될리기.
+  
+  
 ### Untracked 파일 삭제
   
 `git clean -rd`
