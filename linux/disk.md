@@ -2,8 +2,6 @@
 
 ## 명령어 모음
 
----
-
 ### **Disk Free**: `df -h`
 
 디스크 용량 부족에 대한 메세지가 나올 때 사용하는 명령어
@@ -12,7 +10,7 @@
 
 - `Mounted On` 을 살펴보면 어떤 디렉토리에 마운트된 디스크에 공간이 부족한지 확인 가능하다.
 
----
+<br>
 
 ### **Disk Usage**: `sudo du -sh * | sort -rh`
 
@@ -50,3 +48,5 @@ $ sudo ncdu -x /
 ![image](https://user-images.githubusercontent.com/83999058/123581843-ab04d480-d817-11eb-95d5-1ec0252542f0.png
 
 용량이 큰 디렉토리 또는 파일로 정렬이 된 상태며 방향키와 엔터키로 순회할 수 있다.
+
+출처: https://superuser.com/questions/1052403/100-usage-dev-dm-1
