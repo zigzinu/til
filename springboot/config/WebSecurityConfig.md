@@ -31,3 +31,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 출처: 
 - https://stackoverflow.com/questions/60726583/spring-boot-oauth-endpoint-redirects-to-8443
 - https://github.com/spring-projects/spring-security/issues/8140
+
+
+## Error
+
+```
+
+                .successForwardUrl("/sample/home");
+```
+를 사용할 때 에러가 난다
+`.defaultSuccessUrl` 로 바꾸면 괜찮아졌다
+이상하다!
