@@ -4,6 +4,21 @@
 
 **build.gradle**
 ```
+// 여기서 node 관련
+plugins {
+	id 'org.springframework.boot' version '2.4.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+    id 'com.github.node-gradle.node' version '2.2.0'
+}
+
+// 이건 해야하는 건지 모르겠음
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 // Package react into .jar
 node {
     version = '14.16.0'
