@@ -46,7 +46,7 @@ $ sudo apt-get install ncdu
 $ sudo ncdu -x /
 ```
 
-![image](https://user-images.githubusercontent.com/83999058/123581843-ab04d480-d817-11eb-95d5-1ec0252542f0.png
+![image](https://user-images.githubusercontent.com/83999058/123581843-ab04d480-d817-11eb-95d5-1ec0252542f0.png)
 
 용량이 큰 디렉토리 또는 파일로 정렬이 된 상태며 방향키와 엔터키로 순회할 수 있다.
 
