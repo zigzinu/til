@@ -135,3 +135,7 @@ Create `SSLConnectionSocketFactory` instance with `NoopHostnameVerifier.INSTANCE
 ```java
 SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE)
 ```
+
+References
+- https://stackoverflow.com/questions/39762760/javax-net-ssl-sslexception-certificate-doesnt-match-any-of-the-subject-alterna
+- https://pythonq.com/so/java/405472
