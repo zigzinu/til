@@ -120,7 +120,8 @@ Resolved [org.springframework.web.client.ResourceAccessException: I/O error on P
 ```
 
 ### CAUSE:
-If you created `new RestTemplate()` with no specific configuration at all. 
+1. Https url is hosted by server with private (not trusted) cacert.
+2. You created `new RestTemplate()` with no specific configuration at all. 
 
 ## Possible Error 2:
 
