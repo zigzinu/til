@@ -31,5 +31,9 @@ spring:
       period: 0
 ```
 
+### Save html file -> refresh browser -> changes applied!
+
 reference
 - https://stackoverflow.com/questions/58275418/live-reload-for-thymeleaf-template
+
+
