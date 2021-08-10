@@ -52,3 +52,4 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 - assign `AuthenticationManagerBuilder` to use the custom provider
 
 - reference: https://stackoverflow.com/questions/65708171/how-to-create-a-custom-authentication-filter-in-spring-security/65708311#65708311?newreg=474c7c431a7c469c9419e4638a62771a
+- picture reference: https://derekpark.tistory.com/101
