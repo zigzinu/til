@@ -14,4 +14,12 @@ I coded my html file as following.
 </form>
 ```
 
-`entrySaleSubmit()` function calls a ajax 
+`entrySaleSubmit()` function calls a ajax function and updates text content. That's it.
+However when the button is clicked, `entrySaleSubmit()` function is executed as expected but **PAGE REFRESHES**, which is not my intention.
+
+### Fix
+Add `type="button"` attribute to `<button>` tag. Unless the buttom is interpreted as `submit` of the form that surrounds it.
+
+```html
+<button type="button" class="btn btn-primary mb-2" onclick="entrySaleSubmit();">Submit</button>
+``` 
