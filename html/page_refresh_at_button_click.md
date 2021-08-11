@@ -23,3 +23,5 @@ Add `type="button"` attribute to `<button>` tag. Unless the buttom is interprete
 ```html
 <button type="button" class="btn btn-primary mb-2" onclick="entrySaleSubmit();">Submit</button>
 ``` 
+
+reference: https://stackoverflow.com/questions/27759380/how-to-stop-refreshing-page-after-ajax-call
