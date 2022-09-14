@@ -1,3 +1,110 @@
-{
-  "abc": "cdb" 
+
+  "name": "k 1",
+  "symbol": "testsymbol",
+  "description": "Chill Bear Club is a collection of 5555 generative bear themed NFTs that enable holders to 'chill' across multiple different metaverses. The collection features original in-house artwork, that delivers on community, utility and longevity.",
+  "seller_fee_basis_points": 2000,
+  "image": "https://dev.naemo.io/collection/collection_featured_image/aeffa7e7d2b458e4387fc439b793bca6ab12df61e9f21e939ef515fb277ad8f5/image%203.png",
+  "attributes": [
+    {
+      "trait_type": "Head",
+      "value": "Headphnes Pink"
+    },
+    {
+      "trait_type": "Background",
+      "value": "black"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Black Hoodie"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Jeans"
+    },
+    {
+      "trait_type": "Face",
+      "value": "tired"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Pink"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Yellow T-shirts"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "White Shirt"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Red SweatShirt"
+    },
+    {
+      "trait_type": "Aqua Power",
+      "value": 40,
+      "display_type": "boost_number"
+    },
+    {
+      "trait_type": "Face",
+      "value": "sad"
+    },
+    {
+      "trait_type": "Face",
+      "value": "smile"
+    },
+    {
+      "trait_type": "Face",
+      "value": "angry"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Black Hair"
+    },
+    {
+      "trait_type": "Stamina Increase",
+      "value": 10,
+      "display_type": "boost_percentage"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Bear",
+      "value": "Genesis"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Something"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Preppy Pink"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Stud"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://dev.naemo.io/collection/collection_featured_image/aeffa7e7d2b458e4387fc439b793bca6ab12df61e9f21e939ef515fb277ad8f5/image%203.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "3b894NCfZWcRBvvPXxwEkt9aND7d8GZiYH263LE9AgaMttttttttt",
+        "share": 50
+      },
+      {
+        "address": "8YDitbsUU9Qc6At5Dhp93rpTUk9zyxNpz9pFoBJGnCDa",
+        "share": 50
+      }
+    ]
+  }
 }
